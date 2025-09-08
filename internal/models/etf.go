@@ -1,6 +1,7 @@
 package models
 
 type ETFProfile struct {
+	InvestedAmount float64 `json:"string"`
 	NetAssets float64 `json:"net_assets"`
 	NetExpenseRatio float64 `json:"net_expense_ratio"`
 	PortfolioTurnover float64 `json:"portfolio_turnover"`

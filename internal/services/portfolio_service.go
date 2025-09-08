@@ -1,6 +1,3 @@
 package services
 
-// orchestrate fetching + calculation
-func CompareETF(investments map[string]float64) {
-
-}
+// calculate portfolio from etf_service
