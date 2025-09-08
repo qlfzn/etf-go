@@ -1,31 +1,32 @@
 package services
 
 import (
-	"log"
+	"os"
 
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/qlfzn/etf-go/internal/models"
 )
 
-// orchestrate fetching + calculation
-func CompareETF(investments map[string]float64) {
+// Fetch ETF profiles based on submitted investments
+func GetETFProfile (investments map[string]float64) ([]models.ETFProfile, error){
 	var profiles []models.ETFProfile
 	totalAmountInvested := 0.0
 
 	client := &Client{
-		APIKey: "",
+		APIKey: os.Getenv("AV_API_KEY"),
 	}
 
 	for symbol, amount := range investments {
 		profile, err := client.GetETFProfile(symbol)
 		if err != nil {
-			log.Printf("error fetching profile: %s", err)
+			return nil, err
 		}
 
-		profile.InvestedAmount = amount
+		profile.AmountInvested = amount
 
 		profiles = append(profiles, profile)
 		totalAmountInvested += amount
-
 	}
 
+	return profiles, nil
 }

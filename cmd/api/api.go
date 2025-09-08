@@ -17,7 +17,11 @@ func (a *Application) NewServer() http.Handler {
 
 	// define routes
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hello it's finlio here!"))
+		w.Write([]byte("hello it's etf-go here!"))
+	})
+
+	r.Route("/api", func(r chi.Router) {
+		r.Post("/profiles", GetProfilesHandler)
 	})
 
 	return r
